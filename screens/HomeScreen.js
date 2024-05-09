@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView } from 'react-native'
 import React, {useContext} from 'react'
 import FitnessCard from '../components/FitnessCard'
-import { FitnessItems } from '../Context'
+import { FitnessContext } from '../Context'
 
 const HomeScreen = () => {
-    const { workout, calories, minutes } = useContext(FitnessItems)
+    const { workout, calories, minutes } = useContext(FitnessContext)
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView>

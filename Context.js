@@ -1,15 +1,15 @@
 import React, {createContext, useState} from 'react';
 
-const FitnessItems = createContext();
+const FitnessContext = createContext();
 
-const FitnessContext =  ({children}) => {
+const FitnessData =  ({children}) => {
     const [completed, setCompleted] = useState([]);
     const [workout, setWorkout] = useState(0);
     const [calories, setCalories] = useState(0);
     const [minutes, setMinutes] = useState(0);
 
     return (
-        <FitnessItems.Provider
+        <FitnessContext.Provider
             value={{
                 completed,
                 setCompleted,
@@ -22,8 +22,8 @@ const FitnessContext =  ({children}) => {
             }}
         >
             {children}
-        </FitnessItems.Provider>
+        </FitnessContext.Provider>
     )
 }
 
-export {FitnessContext, FitnessItems}
+export {FitnessContext, FitnessData}

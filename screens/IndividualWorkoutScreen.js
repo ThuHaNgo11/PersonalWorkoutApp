@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { useRoute } from '@react-navigation/native'
 import { useNavigation } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons';
-import { FitnessItems } from '../Context'
+import { FitnessContext } from '../Context'
 
 const IndividualWorkoutScreen = () => {
   const route = useRoute();
@@ -12,7 +12,12 @@ const IndividualWorkoutScreen = () => {
   const [index, setIndex] = useState(0);
   const currentExcercise = workoutData[index];
   const navigation = useNavigation();
-  const { completed, setCompleted, workout, setWorkout, calories, setCalories, minutes, setMinutes } = useContext(FitnessItems)
+  const { completed, setCompleted, workout, setWorkout, calories, setCalories, minutes, setMinutes } = useContext(FitnessContext)
+
+  // local data of this workout session to display at the finished workout screen
+  const [thisMinutes, setThisMinutes] = useState(0);
+  const [thisCalories, setThisCalories] = useState(0);
+  const [thisWorkout, setThisWorkout] = useState(0);
 
   return (
     <SafeAreaView>
@@ -33,7 +38,9 @@ const IndividualWorkoutScreen = () => {
             style={styles.bottomButtonText}
             onPress={() => {
               navigation.navigate('rest')
-              setIndex(index - 1)
+              setTimeout(() => {
+                setIndex(index - 1);
+              }, 2000);
             }}
           />
 
@@ -42,7 +49,7 @@ const IndividualWorkoutScreen = () => {
               <Text
                 style={styles.buttonText}
                 onPress={() => {
-                  navigation.navigate('home')
+                  navigation.navigate('finished')
                 }}
               >Done</Text>
             </TouchableOpacity>
@@ -55,8 +62,13 @@ const IndividualWorkoutScreen = () => {
                   setMinutes(minutes + 2.5)
                   setCalories(calories + 6.30)
                   setCompleted([...completed, currentExcercise.name])
+                  setThisWorkout(thisWorkout + 1)
+                  setThisMinutes(thisMinutes + 2.5)
+                  setThisCalories(thisCalories + 6.30)
                   navigation.navigate('rest')
-                  setIndex(index + 1)
+                  setTimeout(() => {
+                    setIndex(index + 1);
+                  }, 2000);
                 }}
               >Done</Text>
             </TouchableOpacity>
@@ -78,7 +90,9 @@ const IndividualWorkoutScreen = () => {
               color="black"
               onPress={() => {
                 navigation.navigate('rest')
-                setIndex(index + 1)
+                setTimeout(() => {
+                  setIndex(index + 1);
+                }, 2000);
               }}
             />
           )}
@@ -87,7 +101,11 @@ const IndividualWorkoutScreen = () => {
           <Text
             style={styles.buttonText}
             onPress={() => {
-              navigation.navigate('home')
+              navigation.navigate('finished', {
+                min: thisMinutes,
+                cal: thisCalories,
+                w: thisWorkout
+              })
             }}
           >Finish</Text>
         </TouchableOpacity>

@@ -1,0 +1,8 @@
+Make it fullstack to retain users' data:
+- db:
++ exercises collection: all available gif, their name
++ users
++ workout data: time, number of workouts, calories burnt, how many days consistency
+
+- features:
++ allow users to customize their workout plan: choose gif, input number of reps, place excercises (gif) in a customized order 

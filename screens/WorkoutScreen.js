@@ -4,14 +4,14 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { useRoute } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { FitnessItems } from '../Context';
+import { FitnessContext } from '../Context';
 import { FontAwesome } from '@expo/vector-icons';
 
 const WorkoutScreen = () => {
     const route = useRoute();
     const workoutSession = route.params.excercises;
     const navigation = useNavigation();
-    const { completed, setCompleted } = useContext(FitnessItems)
+    const { completed, setCompleted } = useContext(FitnessContext)
 
     return (
         <SafeAreaView style={{ flex: 1 }}>

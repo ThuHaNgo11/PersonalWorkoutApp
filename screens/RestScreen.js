@@ -2,13 +2,14 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
+import CountDown from 'react-native-countdown-component';
 
 const RestScreen = () => {
     const navigation = useNavigation();
     const [counter, setCounter] = useState(3);
     useEffect(() => {
-        if(counter === 0){navigation.goBack()}
-        counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
+        if (counter === 0) { navigation.goBack() }
+        setTimeout(() => setCounter(counter - 1), 1000);
     }, [counter]);
 
     return (
